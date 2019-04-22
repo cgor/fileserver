@@ -6,14 +6,14 @@ var diskspace = require('diskspace');
 var fs = require('fs');
     path = require("path");
 
-var p = "C:/Users/administrator.TSLAB.000/Desktop/nodejs/serverfiles/"
+var p = "/fileserver/serverfiles/"
 var bytesTotal, bytesUsed, bytesFree;
 var maxBytes = 0;
 var byteHeadroom = 2000000000;
 
 function checkSpace() {
 	maxBytes = 0;
-	diskspace.check('C', function (err, result)
+	diskspace.check('/', function (err, result)
 	{
 		bytesTotal = result.total;
 		bytesUsed = result.used;
@@ -114,8 +114,8 @@ http.createServer(function (req, res) {
 					//res.end();
 			} else {
 				var oldpath = files.filetoupload.path;
-				var newpath = 'C:/Users/administrator.TSLAB.000/Desktop/nodejs/serverfiles/' + files.filetoupload.name;
-				if (newpath != 'C:/Users/administrator.TSLAB.000/Desktop/nodejs/serverfiles/') {
+				var newpath = '/fileserver/serverfiles/' + files.filetoupload.name;
+				if (newpath != '/fileserver/serverfiles/') {
 					fs.rename(oldpath, newpath, function (err) {
 						if (err) throw err;
 						//console.log('File Uploaded!');
